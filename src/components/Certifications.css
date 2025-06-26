@@ -1,0 +1,269 @@
+/* =========================
+   src/components/Certifications.css
+   ========================= */
+
+/* Variables globales (à déclarer idéalement en fichier global) :
+:root {
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --color-primary: #0d3b66;
+  --color-accent: #f4d35e;
+  --color-bg-section: #12121e;
+  --color-surface: rgba(20, 20, 35, 0.85);
+  --color-text-light: #ffffff;
+  --color-text-muted: rgba(255,255,255,0.7);
+  --transition-default: 0.3s ease;
+}
+*/
+
+/* Wrapper section */
+.certif-wrapper {
+  position: relative;
+  background-color: var(--color-bg-section);
+  color: var(--color-text-light);
+  padding: var(--space-xl) var(--space-md);
+  overflow: hidden;
+}
+
+/* Conteneur centré pour le titre */
+.certif-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* Titre centré */
+.certif-title {
+  font-size: 2.5rem;
+  text-align: center;
+  color: var(--color-accent);
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+/* Underline animé */
+.certif-title-underline {
+  width: 120px;              /* longueur finale de l’underline */
+  height: 4px;
+  background: var(--color-accent);
+  transform-origin: center;  /* scaleX à partir du centre, ou left si vous préférez */
+  margin-top: var(--space-xs);
+  /* initialement scaleX(0) via Framer Motion */
+}
+
+/* Grille */
+.certif-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Wrapper perspective pour tilt 3D */
+.certif-card-wrapper {
+  perspective: 800px;
+}
+
+/* Carte */
+.certif-card {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  transform-style: preserve-3d;
+  border-radius: 1rem;
+  background-color: var(--color-surface);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  transition: box-shadow 0.3s ease;
+}
+/* Ombre plus prononcée au hover (gérée aussi en Framer Motion) */
+.certif-card-wrapper:hover .certif-card {
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+}
+
+/* Contenu interne */
+.certif-card-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+.certif-card-icon {
+  font-size: 2.5rem;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+  transition: color 0.3s ease;
+}
+.certif-card-title {
+  font-size: 1rem;
+  color: var(--color-text-light);
+  line-height: 1.2;
+  margin: 0;
+  padding: 0 var(--space-xs);
+}
+
+/* Overlay texte Aperçu */
+.certif-card-overlay-text {
+  position: absolute;
+  bottom: var(--space-sm);
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity var(--transition-default), transform var(--transition-default);
+}
+.certif-card-overlay-text.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Bordure animée autour de la carte (effet halo ou ligne animée) */
+.certif-card-border-anim {
+  position: absolute;
+  top: -2px; left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  border: 2px solid var(--color-accent);
+  border-radius: 1rem;
+  pointer-events: none;
+  opacity: 0;
+  /* On animera rotate et opacity via Framer Motion */
+}
+
+/* Modal overlay et content (inchangé ou comme précédemment) */
+.certif-modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.certif-modal-content {
+  position: relative;
+  width: 90vw;
+  height: 90vh;
+  max-width: 1000px;
+  max-height: 900px;
+  background-color: var(--color-surface);
+  border-radius: 1rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.certif-modal-close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  color: var(--color-text-light);
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+.certif-modal-close:hover {
+  transform: scale(1.2);
+}
+.certif-modal-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background-color: rgba(0,0,0,0.1);
+}
+.certif-modal-icon {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+}
+.certif-modal-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+}
+.certif-modal-body {
+  flex: 1;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.certif-pdf-preview {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+.certif-modal-footer {
+  padding: var(--space-md);
+  text-align: center;
+  background-color: rgba(0,0,0,0.05);
+}
+.certif-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: var(--space-xs) var(--space-sm);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #fff;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.certif-download-btn:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .certif-modal-content {
+    width: 95vw;
+    height: 80vh;
+  }
+  .certif-card {
+    height: 200px;
+  }
+  .certif-card-icon {
+    font-size: 2rem;
+  }
+  .certif-card-title {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 480px) {
+  .certif-modal-content {
+    width: 98vw;
+    height: 70vh;
+  }
+  .certif-card {
+    height: 180px;
+  }
+  .certif-card-icon {
+    font-size: 1.8rem;
+  }
+  .certif-card-title {
+    font-size: 0.85rem;
+  }
+}

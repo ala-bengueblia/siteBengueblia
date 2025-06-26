@@ -1,0 +1,116 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(90deg, #ffffffcc 0%, #fefefecc 100%);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  background: linear-gradient(90deg, #f4f4f4cc, #ffffffdd);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo-gradient {
+  background: linear-gradient(90deg, #32365f, #335288);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientMove 5s infinite linear;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.nav-links {
+  display: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  position: relative;
+  font-size: larger;
+  font-weight: 990;
+  color: #333;
+  text-decoration: none;
+  padding: 0.35rem 0.40rem;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: #ff4e50;
+}
+.nav-links a .underline {
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  transform-origin: right center;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  width: 100%;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+.nav-links a.active,
+.nav-links a:hover .underline {
+  transform: scaleX(1);
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Mobile menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 75%;
+  max-width: 300px;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #fff, #ffe5ec);
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  padding-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 999;
+}
+.mobile-menu a {
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+.mobile-menu a:hover {
+  color: #ff416c;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+  .menu-button {
+    display: none;
+  }
+}

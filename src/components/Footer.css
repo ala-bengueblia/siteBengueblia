@@ -1,0 +1,55 @@
+/* =========================
+   src/components/Footer.css
+   ========================= */
+
+.footer {
+  background-color: var(--color-accent);
+  padding: var(--space-md) 0;
+  color: var(--color-neutral-dark);
+  text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.03);
+}
+
+.footer-container {
+  max-width: 1200px;
+  height: 50px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.footer-text {
+  position: center;
+  font-size: 1.2rem;
+  color: var(--color-neutral-dark);
+  margin: 0;
+}
+
+.footer-socials {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+}
+
+.footer-socials a {
+  font-size: 1.4rem;
+  color: var(--color-neutral-dark);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-socials a:hover {
+  color: var(--color-neutral-white);
+  transform: scale(1.2) rotate(3deg);
+}
+
+/* Responsive: switch to row on wider viewports */
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

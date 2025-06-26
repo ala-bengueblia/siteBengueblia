@@ -1,0 +1,18 @@
+/* src/components/SectionWrapper.css */
+.section-wrapper {
+  position: relative;
+  overflow: hidden;
+  /* padding vertical commun pour espacer les sections */
+  padding: var(--space-xxl) 0;
+}
+
+.section-content {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  max-width: 1200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: var(--space-lg) var(--space-md);
+}

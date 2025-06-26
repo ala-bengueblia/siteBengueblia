@@ -1,0 +1,203 @@
+/* =========================
+   src/styles/global.css
+   ========================= */
+
+:root {
+  /* Palette */
+  --color-primary: #0D3B66;
+  --color-secondary: #FAF0CA;
+  --color-accent: #017362;
+  --color-highlight: #EE964B;
+  --color-neutral-dark: #333333;
+  --color-neutral-light: #F9F9F9;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Typographie */
+  --font-sans: 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Merriweather', serif;
+  --base-font-size: 16px;
+  --line-height: 1.6;
+
+  /* Espacements */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-xxl: 6rem;
+}
+
+/* Reset léger */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: var(--base-font-size);
+  scroll-behavior: smooth;
+}
+body {
+  /* Remplacez le gradient animé par l'image de fond */
+  background-image: url('../assets/background1.jpg');
+  background-size: cover;
+
+
+  background-position: center;
+  background-attachment: fixed; /* Si vous voulez un effet “parallax” natif */
+  color: var(--color-neutral-dark);
+  font-family: var(--font-sans);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  /* Si nécessaire, on peut ajouter un overlay via pseudo-élément */
+  position: relative;
+}
+/* Overlay pour lisibilité */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  /* Couleur semi-transparente : blanc ou noir selon contraste souhaité */
+  background-color: rgba(255, 252, 252, 0.7);
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--color-accent);
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+ul {
+  list-style: none;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+.section {
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-neutral-dark);
+  margin-bottom: var(--space-md);
+  font-family: var(--font-serif);
+}
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  animation: fadeInUp 0.8s ease both;
+}
+h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+  animation: fadeInUp 0.8s ease both;
+}
+h3 {
+  font-size: 1.75rem;
+  line-height: 1.4;
+}
+p {
+  margin-bottom: var(--space-md);
+  font-size: 1rem;
+}
+.button {
+  display: inline-block;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 9999px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.button-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+.button-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.button-outline:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+.text-center {
+  text-align: center;
+}
+.mb-md {
+  margin-bottom: var(--space-md);
+}
+.mt-md {
+  margin-top: var(--space-md);
+}
+.mb-lg {
+  margin-bottom: var(--space-lg);
+}
+.mt-lg {
+  margin-top: var(--space-lg);
+}
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+}
+@media (min-width: 768px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Animations globales */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+/* On supprime l’ancien gradient animé du body */
+/* ... */

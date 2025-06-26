@@ -1,0 +1,344 @@
+/* =========================
+   src/components/Contact.css
+   ========================= */
+
+
+/* Wrapper section */
+.contact-wrapper {
+  position: relative;
+  background-color: var(--color-input-border);
+  padding: var(--space-xl) var(--space-md);
+  overflow: hidden;
+  color: var(--color-text);
+}
+
+/* Décor flottant (blobs) */
+.contact-blob {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, var(--color-accent) 0%, transparent 70%);
+  opacity: 0.1;
+  animation: contactBlobFloat 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+.contact-blob.blob-1 {
+  width: 250px;
+  height: 250px;
+  top: -60px;
+  left: -80px;
+  animation-duration: 22s;
+  animation-delay: 0s;
+}
+.contact-blob.blob-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -50px;
+  right: -60px;
+  animation-duration: 18s;
+  animation-delay: 3s;
+}
+.contact-blob.blob-3 {
+  width: 300px;
+  height: 300px;
+  top: 30%;
+  right: -100px;
+  animation-duration: 25s;
+  animation-delay: 5s;
+}
+@keyframes contactBlobFloat {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(20px, -20px) scale(1.1) rotate(30deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+/* Card principale */
+.contact-card {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  perspective: 1000px;
+  z-index: 1;
+}
+.contact {
+  background-color: var(--color-surface);
+  border-radius: 1rem;
+  padding: var(--space-lg);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  color: var(--color-text);
+}
+
+/* Si on veut un léger effet hover global (en plus du tilt JS) */
+.contact-card:hover .contact {
+  box-shadow: 0 12px 48px rgba(0,0,0,0.5);
+}
+
+/* Titre */
+.contact-title {
+  font-size: 2rem;
+  margin-bottom: var(--space-lg);
+  position: relative;
+  color: var(--color-accent);
+  overflow: hidden;
+}
+.contact-title::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 60px;
+  height: 3px;
+  background: var(--color-accent);
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+}
+.contact-title:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Formulaire */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+/* Champ individuel contenant input + label */
+.contact-form-field {
+  position: relative;
+  width: 100%;
+}
+
+/* Input et textarea */
+.input-field {
+  width: 100%;
+  padding: var(--space-md) var(--space-sm) var(--space-xs) var(--space-sm);
+  background-color: var(--color-input-bg);
+  border: 2px solid var(--color-input-border);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+/* Placeholder invisible pour floating label */
+.input-field::placeholder {
+  color: transparent;
+}
+
+/* Textarea ajuste */
+.textarea-field {
+  padding-top: var(--space-md);
+  padding-bottom: var(--space-sm);
+  resize: vertical;
+}
+
+/* Label flottant */
+.input-label {
+  position: absolute;
+  top: 50%;
+  left: var(--space-sm);
+  transform: translateY(-50%);
+  background-color: transparent;
+  padding: 0 var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+/* Quand input focus ou non vide */
+.input-field:focus + .input-label,
+.input-field:not(:placeholder-shown) + .input-label {
+  top: 0;
+  transform: translateY(-50%) scale(0.85);
+  color: var(--color-accent);
+}
+
+/* Focus input */
+.input-field:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(244,211,94,0.3);
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Submit button */
+.submit-button {
+  align-self: center;
+  padding: var(--space-sm) var(--space-lg);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effet “shine” sur bouton */
+.submit-button::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: rgba(255,255,255,0.2);
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.7s ease-in-out;
+  pointer-events: none;
+}
+.submit-button:hover::after {
+  transform: translateX(100%) rotate(25deg);
+}
+
+/* Hover et focus bouton */
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+.submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(244,211,94,0.5);
+}
+
+/* Info contact */
+.contact-info {
+  margin-top: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  color: var(--color-text);
+  z-index: 1;
+}
+
+/* Chaque item */
+.contact-info .item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 0.75rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background animé à l’hover sur item */
+.contact-info .item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.1), rgba(255,255,255,0.0));
+  transition: left 0.4s ease;
+  pointer-events: none;
+}
+.contact-info .item:hover::after {
+  left: 100%;
+}
+
+/* Hover item: léger décalage */
+.contact-info .item:hover {
+  transform: translateX(6px);
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* Icon */
+.contact-info .icon {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+.contact-info .item:hover .icon {
+  color: var(--color-primary);
+  transform: scale(1.2);
+}
+
+/* Lien LinkedIn */
+.contact-info a {
+  color: var(--color-text);
+  position: relative;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.contact-info a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease;
+}
+.contact-info a:hover {
+  color: var(--color-accent);
+}
+.contact-info a:hover::after {
+  width: 100%;
+}
+
+/* Feedback submit */
+.submit-feedback {
+  background-color: var(--color-surface);
+  padding: var(--space-lg);
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  color: var(--color-text);
+}
+.submit-feedback h3 {
+  font-size: 1.5rem;
+  color: var(--color-accent);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-wrapper {
+    padding: var(--space-md);
+  }
+  .contact {
+    padding: var(--space-md);
+  }
+  .contact-title {
+    font-size: 1.75rem;
+  }
+  .input-field {
+    font-size: 0.95rem;
+  }
+  .submit-button {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.95rem;
+  }
+  .contact-info .item {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}
+
+/* Keyframes fadeInUp si non définies globalement */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

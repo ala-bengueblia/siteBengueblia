@@ -1,0 +1,476 @@
+/* =========================
+   src/components/About.css
+   ========================= */
+
+/* Variables CSS globales (à définir idéalement dans :root, ex dans index.css) :
+:root {
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --line-height: 1.6;
+  --color-primary: #0d3b66;
+  --color-accent: #f4d35e;
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #1e1e2f;
+  --color-surface-light: rgba(227, 227, 249, 0.85);
+  --color-surface-dark: rgba(30, 30, 47, 0.85);
+  --color-text-light: #333333;
+  --color-text-dark: #dddddd;
+}
+*/
+
+/* Thème clair / sombre */
+:root[data-theme="light"] {
+  --bg-primary: var(--color-bg-light);
+  --surface: var(--color-surface-light);
+  --text-color: var(--color-text-light);
+  --decor-opacity: 0.06;
+}
+:root[data-theme="dark"] {
+  --bg-primary: var(--color-bg-white);
+  --surface: var(--color-surface-dark);
+  --text-color: var(--color-text-dark);
+  --decor-opacity: 0.15;
+}
+
+/* Styles globaux pour la section About */
+.about-wrapper {
+  position: relative;
+  background-color: var(--color-bg-white);
+  overflow: hidden;
+  padding: var(--space-lg);
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Bouton toggle thème */
+.theme-toggle-btn {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease;
+}
+.theme-toggle-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Arrière-plan blobs animés */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, var(--color-accent) 0%, transparent 70%);
+  opacity: var(--decor-opacity);
+  animation: floatBlob 15s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.blob-1 {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: -80px;
+  animation-duration: 20s;
+  animation-delay: 0s;
+}
+.blob-2 {
+  width: 200px;
+  height: 200px;
+  bottom: -60px;
+  right: -50px;
+  animation-duration: 18s;
+  animation-delay: 3s;
+}
+.blob-3 {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  right: -100px;
+  animation-duration: 22s;
+  animation-delay: 5s;
+}
+@keyframes floatBlob {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(20px, -30px) scale(1.1) rotate(45deg);
+  }
+  100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+}
+
+/* Wrapper pour perspective 3D */
+.about-3d-wrapper {
+  perspective: 1000px;
+  perspective-origin: center center;
+}
+
+/* Carte principale */
+.about-container {
+  position: relative;
+  margin: auto;
+  max-width: 1000px;
+  background-color: var(--surface);
+  border-radius: 1.5rem;
+  border: 2px solid transparent;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background-color 0.4s ease;
+  overflow: hidden;
+  padding: var(--space-lg);
+}
+
+/* Shine effect */
+.about-container::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  transition: transform 0.7s ease-in-out;
+  pointer-events: none;
+  z-index: 2;
+}
+.about-container:hover::after,
+.about-container:focus-within::after {
+  transform: translateX(100%) rotate(25deg);
+}
+
+/* Layout interne : avatar + intro */
+.about-inner {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+@media (min-width: 768px) {
+  .about-inner {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* Avatar */
+.about-avatar-wrapper {
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 160px;
+  height: 160px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--bg-primary);
+  transform-style: preserve-3d;
+  transition: box-shadow 0.3s ease;
+}
+.about-avatar-wrapper:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+}
+.about-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Contenu textuel */
+.about-content {
+  flex: 1;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .about-content {
+    text-align: left;
+  }
+}
+
+/* Titres */
+.about-title {
+  font-size: 2.75rem;
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+  color: var(--text-color);
+}
+.section-title {
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  color: var(--text-color);
+}
+.gradient-text {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sous-titre */
+.about-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-lg);
+  color: var(--text-color);
+}
+.rotating-word {
+  display: inline-block;
+  color: var(--color-primary);
+  font-weight: 600;
+  position: relative;
+}
+
+/* Paragraphes */
+.about-text-block {
+  margin-bottom: var(--space-lg);
+}
+.about-text {
+  font-size: 1rem;
+  line-height: var(--line-height);
+  color: var(--text-color);
+  margin-bottom: var(--space-md);
+}
+.about-highlight {
+  position: relative;
+  color: var(--color-primary);
+  font-weight: 600;
+}
+.about-highlight::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.4em;
+  background-color: var(--color-accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.4s ease-in-out;
+  z-index: -1;
+}
+.about-highlight:hover::before {
+  transform: scaleX(1);
+}
+
+/* Bouton Télécharger CV */
+.btn-download-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-download-cv:hover {
+  /* Au hover, fond noir, texte blanc */
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  /* Vous pouvez ajuster box-shadow si besoin */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+.icon-cv {
+  font-size: 1.1rem;
+}
+
+/* Icônes sociales */
+.social-icons {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+.social-icons a {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+.social-icons a:hover {
+  /* Au hover, icône blanche sur fond éventuellement sombre ou simplement reste blanche */
+  color: #ffffff !important;
+  transform: scale(1.2);
+}
+
+/* Timeline */
+.timeline-section {
+  margin-top: var(--space-xl);
+}
+.timeline-container {
+  position: relative;
+  padding: var(--space-lg) 0;
+}
+/* Ligne centrale verticale */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: var(--color-accent);
+  transform: translateX(-50%);
+}
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: var(--space-md) var(--space-lg);
+  box-sizing: border-box;
+}
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  width: 16px;
+  height: 16px;
+  background: var(--color-primary);
+  border: 4px solid var(--surface);
+  border-radius: 50%;
+  z-index: 3;
+}
+.timeline-item.left::before {
+  right: -8px;
+}
+.timeline-item.right::before {
+  left: -8px;
+}
+.timeline-content {
+  background-color: var(--surface);
+  padding: var(--space-md);
+  border-radius: 8px;
+  display: inline-block;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.timeline-year {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.timeline-title {
+  margin: var(--space-xs) 0;
+  font-size: 1.1rem;
+  color: var(--text-color);
+}
+.timeline-desc {
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+/* Sur mobile : une colonne */
+@media (max-width: 768px) {
+  .timeline-container::before {
+    left: 20px;
+  }
+  .timeline-item {
+    width: 100%;
+    padding-left: var(--space-lg);
+    padding-right: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .timeline-item.left,
+  .timeline-item.right {
+    left: 0;
+    text-align: left;
+  }
+  .timeline-item::before {
+    left: 12px;
+  }
+}
+
+/* Skills */
+.skills-section {
+  margin-top: var(--space-xl);
+}
+.skills-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.skill-name {
+  width: 120px;
+  flex-shrink: 0;
+  color: var(--text-color);
+}
+.skill-bar-bg {
+  flex: 1;
+  background: rgba(0,0,0,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 12px;
+}
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  width: 0; /* animé via Framer Motion */
+}
+.skill-percentage {
+  width: 50px;
+  text-align: right;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+/* Responsive global */
+@media (max-width: 600px) {
+  .about-wrapper {
+    padding: var(--space-md);
+  }
+  .about-avatar-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+  .about-title {
+    font-size: 2.25rem;
+  }
+  .section-title {
+    font-size: 1.75rem;
+  }
+  .about-subtitle {
+    font-size: 1.25rem;
+  }
+  .about-text {
+    font-size: 0.95rem;
+  }
+}
+
+/* Fallback animations si JS désactivé : fadeInUp */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

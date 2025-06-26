@@ -1,0 +1,30 @@
+
+/* puis @layer base / components / utilities si tu as des personnalisations */
+
+
+/* Reset léger si besoin */
+@layer base {
+  /* Supprime marges/paddings par défaut indésirables */
+  body {
+    @apply m-0 p-0 bg-white text-gray-800;
+  }
+  /* Police personnalisée si désiré */
+  /* 
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+  */
+}
+
+/* Scroll smooth pour ancres */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Vous pouvez ajouter des classes utilitaires globales ici */
+@layer utilities {
+  /* Exemple : style de lien global */
+  .link-primary {
+    @apply text-primary hover:text-accent transition-colors duration-200;
+  }
+}
