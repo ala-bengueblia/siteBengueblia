@@ -8,7 +8,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
 
-  // Pour tilt 3D
+  // For 3D tilt
   const cardRef = useRef(null);
   const handleMouseMove = (e) => {
     const card = cardRef.current;
@@ -18,7 +18,7 @@ export default function Contact() {
     const y = e.clientY - rect.top;
     const midX = rect.width / 2;
     const midY = rect.height / 2;
-    const maxRot = 10; // intensité du tilt
+    const maxRot = 10; // tilt intensity
     const rotY = ((x - midX) / midX) * maxRot;
     const rotX = ((midY - y) / midY) * maxRot;
     card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
@@ -34,10 +34,10 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ici, traiterez l’envoi via API/email service
+    // Here, you will handle submission via API/email service
     console.log('Contact submitted', form);
     setSubmitted(true);
-    // Remettre submitted à false après un délai si vous voulez réafficher le formulaire
+    // Reset submitted to false after a delay if you want to show the form again
     setTimeout(() => {
       setSubmitted(false);
       setForm({ name: '', email: '', message: '' });
@@ -56,7 +56,7 @@ export default function Contact() {
 
   return (
     <section className="contact-wrapper">
-      {/* Décor flottant en arrière-plan */}
+      {/* Floating decor in the background */}
       <div className="contact-blob blob-1" />
       <div className="contact-blob blob-2" />
       <div className="contact-blob blob-3" />
@@ -80,7 +80,7 @@ export default function Contact() {
                 custom={1}
                 variants={containerVariants}
               >
-                Contactez-moi
+                Contact Me
               </motion.h2>
 
               <motion.form
@@ -107,7 +107,7 @@ export default function Contact() {
                     required
                   />
                   <label htmlFor="name" className="input-label">
-                    Votre nom
+                    Your Name
                   </label>
                 </motion.div>
 
@@ -128,7 +128,7 @@ export default function Contact() {
                     required
                   />
                   <label htmlFor="email" className="input-label">
-                    Votre e-mail
+                    Your Email
                   </label>
                 </motion.div>
 
@@ -149,7 +149,7 @@ export default function Contact() {
                     required
                   />
                   <label htmlFor="message" className="input-label">
-                    Votre message
+                    Your Message
                   </label>
                 </motion.div>
 
@@ -162,11 +162,11 @@ export default function Contact() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
                 >
-                  Envoyer
+                  Send
                 </motion.button>
               </motion.form>
 
-              {/* Info de contact */}
+              {/* Contact Info */}
               <motion.div
                 className="contact-info"
                 custom={6}
@@ -200,7 +200,7 @@ export default function Contact() {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.5 }}
             >
-              <h3>Merci ! Votre message a été envoyé.</h3>
+              <h3>Thank you! Your message has been sent.</h3>
             </motion.div>
           )}
         </AnimatePresence>

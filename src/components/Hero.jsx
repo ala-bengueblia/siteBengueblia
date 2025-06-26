@@ -1,10 +1,11 @@
+// src/components/Hero.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-import avatar from '../assets/ala.jpg'; // Veillez à une taille/poids optimisés
+import avatar from '../assets/ala.jpg'; // Ensure optimized size and format
 import './Hero.css';
 
 export default function Hero() {
-  // Variants Framer Motion pour stagger
+  // Framer Motion variants for staggered animations
   const containerVariants = {
     hidden: {},
     visible: {
@@ -13,10 +14,12 @@ export default function Hero() {
       },
     },
   };
+
   const contentVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0 },
   };
+
   const imageVariants = {
     hidden: { opacity: 0, x: 50 },
     visible: { opacity: 1, x: 0 },
@@ -24,7 +27,7 @@ export default function Hero() {
 
   return (
     <section className="hero-wrapper">
-      {/* Décor en arrière-plan similaire à About, avec opacité adoucie */}
+      {/* Background decoration similar to About section, with softened opacity */}
       <div className="hero-decor" aria-hidden="true" />
 
       <motion.div
@@ -33,7 +36,7 @@ export default function Hero() {
         animate="visible"
         variants={containerVariants}
       >
-        {/* Contenu texte */}
+        {/* Text content */}
         <motion.div
           className="hero-content"
           variants={contentVariants}
@@ -45,7 +48,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            Hello, I&apos;m <span className="gradient-text">Ala Bengueblia</span>
+            Hi, I&apos;m <span className="gradient-text">Ala Bengueblia</span>
             <motion.span
               className="hero-underline"
               initial={{ scaleX: 0 }}
@@ -53,6 +56,7 @@ export default function Hero() {
               transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.3 }}
             />
           </motion.h1>
+
           <motion.p
             className="hero-subtitle"
             initial={{ opacity: 0, y: -10 }}
@@ -87,13 +91,13 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Image */}
+        {/* Profile image section */}
         <motion.div
           className="hero-image"
           variants={imageVariants}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.5 }}
         >
-          <img src={avatar} alt="Ala Bengueblia" />
+          <img src={avatar} alt="Ala Bengueblia portrait" />
         </motion.div>
       </motion.div>
     </section>

@@ -36,7 +36,7 @@ const skills = [
 ];
 
 export default function Skills() {
-  // variants pour stagger children si besoin
+  // variants for staggering child animations
   const containerVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.1 } },
@@ -48,7 +48,7 @@ export default function Skills() {
 
   return (
     <section className="skills-wrapper">
-      {/* Si vous souhaitez un décor animé similaire à Projets, décommentez / ajoutez .skills-decor */}
+      {/* Uncomment/add .skills-decor if you want an animated background like in Projects */}
       {/* <div className="skills-decor" aria-hidden="true" /> */}
 
       <motion.div
@@ -59,7 +59,7 @@ export default function Skills() {
         variants={containerVariants}
       >
         <motion.h2 className="skills-title" variants={cardVariants}>
-          Compétences & Technologies
+          Skills & Technologies
           <motion.span
             className="skills-underline"
             initial={{ scaleX: 0 }}

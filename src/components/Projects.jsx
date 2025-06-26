@@ -1,4 +1,3 @@
-// src/components/Projects.jsx
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -22,7 +21,7 @@ const projects = [
   {
     id: 'sports-sale',
     title: 'Sports Sale Website',
-    shortDesc: "Site de vente d'articles de sport avec HTML, CSS, JS & PHP.",
+    shortDesc: 'E-commerce platform to sell sports products using HTML, CSS, JS & PHP.',
     techStack: [
       { name: 'HTML5', icon: <SiHtml5 />, color: '#E34F26' },
       { name: 'CSS3', icon: <SiCss3 />, color: '#1572B6' },
@@ -30,18 +29,18 @@ const projects = [
       { name: 'PHP', icon: <SiPhp />, color: '#777BB4' },
       { name: 'MySQL', icon: <SiMysql />, color: '#4479A1' },
     ],
-    details: `Site e-commerce pour vente d'articles de sport :
-- Pages produits, panier, checkout.
-- Authentification utilisateur, gestion de profil.
-- Back-office en PHP pour gestion des stocks et des commandes.
-- Design responsive pour mobile et desktop.`,
+    details: `E-commerce website for sports gear:
+- Product pages, shopping cart, and checkout process.
+- User authentication and profile management.
+- Admin panel in PHP to manage inventory and orders.
+- Fully responsive design for all devices.`,
     demoUrl: 'https://youtu.be/Ou9LNqssj0Q',
     moreLink: null,
   },
   {
     id: 'face-recognition',
-    title: 'Facial Recognition',
-    shortDesc: 'Reconnaissance faciale avec Flask, OpenCV, face_recognition, NumPy et REST API.',
+    title: 'Facial Recognition System',
+    shortDesc: 'Facial recognition using Flask, OpenCV, face_recognition, NumPy, and REST API.',
     techStack: [
       { name: 'Flask', icon: <SiFlask />, color: '#000000' },
       { name: 'OpenCV', icon: <FiCamera />, color: '#5C3EE8' },
@@ -49,18 +48,18 @@ const projects = [
       { name: 'REST API', icon: <FiServer />, color: '#4A90E2' },
       { name: 'NumPy', icon: <SiPython />, color: '#3776AB' },
     ],
-    details: `Application de reconnaissance faciale :
-- Backend Flask exposant une REST API.
-- Traitement d’images avec OpenCV et bibliothèque face_recognition.
-- Stockage et gestion de visages pour entraînement.
-- Manipulations d’images et embeddings via NumPy.`,
+    details: `AI-powered facial recognition system:
+- RESTful API with Flask backend.
+- Image processing and face detection with OpenCV and face_recognition.
+- Facial database handling and training setup.
+- Embeddings and data manipulation via NumPy.`,
     demoUrl: 'https://youtu.be/coYwEcQbj4E',
     moreLink: null,
   },
   {
     id: 'sotupub-management',
-    title: 'Gestion Candidats & Admin',
-    shortDesc: 'React, Node.js, Express, MongoDB, bcrypt & JWT.',
+    title: 'Candidate & Admin Management System',
+    shortDesc: 'A full-stack platform using React, Node.js, Express, MongoDB, bcrypt & JWT.',
     techStack: [
       { name: 'React', icon: <SiReact />, color: '#61DAFB' },
       { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933' },
@@ -69,18 +68,18 @@ const projects = [
       { name: 'bcrypt', icon: <FiKey />, color: '#555555' },
       { name: 'JWT', icon: <FiKey />, color: '#555555' },
     ],
-    details: `Plateforme interne chez Sotupub :
-- Frontend en React pour tableaux de bord candidats et admins.
-- Backend Node.js + Express, base MongoDB.
-- Authentification sécurisée : hash de mot de passe avec bcrypt et tokens JWT.
-- Gestion des rôles et permissions.`,
+    details: `Internal candidate management tool:
+- React dashboards for admins and applicants.
+- Backend with Node.js and Express connected to MongoDB.
+- Secure login system using bcrypt for hashing and JWT for sessions.
+- Role-based access control and admin functionalities.`,
     demoUrl: null,
     moreLink: null,
   },
   {
     id: 'securepix',
-    title: 'SecurePix',
-    shortDesc: 'MOCCA anomaly detection, React frontend, Node.js backend, microservice Flask AI, chatbot.',
+    title: 'SecurePix Image Authentication',
+    shortDesc: 'Anomaly detection using MOCCA, with React frontend, Node.js backend, Flask AI, and chatbot.',
     techStack: [
       { name: 'React', icon: <SiReact />, color: '#61DAFB' },
       { name: 'Node.js', icon: <SiNodedotjs />, color: '#339933' },
@@ -88,11 +87,11 @@ const projects = [
       { name: 'Docker', icon: <SiDocker />, color: '#2496ED' },
       { name: 'Chatbot', icon: <SiJavascript />, color: '#F7DF1E' },
     ],
-    details: `SecurePix :
-- Frontend React avec pages d'upload et visualisation des résultats.
-- Backend Node.js orchestrant le microservice AI.
-- Microservice Flask utilisant modèle MOCCA pour détection d’anomalies.
-- Intégration d’un chatbot pour assistance utilisateur.`,
+    details: `SecurePix platform:
+- Frontend built with React for uploading and viewing results.
+- Node.js backend handling requests and managing services.
+- AI microservice with Flask using MOCCA for image forgery detection.
+- Integrated chatbot for real-time user assistance.`,
     demoUrl: 'https://youtu.be/Ou9LNqssj0Q',
     moreLink: null,
   },
@@ -101,7 +100,7 @@ const projects = [
 export default function Projects() {
   const [selected, setSelected] = useState(null);
 
-  // Variants Framer Motion
+  // Framer Motion variants
   const containerVariants = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.15 } },
@@ -125,7 +124,7 @@ export default function Projects() {
         variants={containerVariants}
       >
         <motion.h2 className="projects-title" variants={cardVariants}>
-          <span className="gradient-text">Mes Projets</span>
+          <span className="gradient-text">My Projects</span>
           <motion.span
             className="projects-underline"
             initial={{ scaleX: 0 }}
@@ -149,9 +148,7 @@ export default function Projects() {
               <div
                 className="project-card-top-border"
                 style={{
-                  background: `linear-gradient(90deg, ${proj.techStack[0].color}, ${
-                    proj.techStack[proj.techStack.length - 1].color
-                  })`,
+                  background: `linear-gradient(90deg, ${proj.techStack[0].color}, ${proj.techStack[proj.techStack.length - 1].color})`,
                 }}
               />
 
@@ -187,7 +184,7 @@ export default function Projects() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Voir le projet
+                  View Project
                 </motion.button>
               </div>
             </motion.div>
@@ -195,7 +192,7 @@ export default function Projects() {
         </div>
       </motion.div>
 
-      {/* Modale */}
+      {/* Modal */}
       <AnimatePresence>
         {selected && (
           <motion.div
@@ -225,7 +222,7 @@ export default function Projects() {
               <div className="modal-body">
                 <p className="modal-details">{selected.details}</p>
                 <div className="modal-techstack">
-                  <h4>Technologies :</h4>
+                  <h4>Technologies:</h4>
                   <div className="modal-tech-logos">
                     {selected.techStack.map((tech, i) => (
                       <div
@@ -244,10 +241,10 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Démo : iframe YouTube ou vidéo locale */}
+                {/* Demo: YouTube iframe or local video */}
                 {selected.demoUrl && (
                   <div className="modal-video">
-                    <h4 className="gradient-text">Démo :</h4>
+                    <h4 className="gradient-text">Demo:</h4>
                     {(selected.demoUrl.includes('youtu.be') ||
                       selected.demoUrl.includes('youtube.com')) ? (
                       <div className="video-embed">
@@ -267,7 +264,7 @@ export default function Projects() {
                       </div>
                     ) : (
                       <video src={selected.demoUrl} controls className="project-video">
-                        Votre navigateur ne supporte pas la vidéo.
+                        Your browser does not support the video.
                       </video>
                     )}
                   </div>
@@ -276,7 +273,7 @@ export default function Projects() {
                 {selected.moreLink && (
                   <div className="modal-more">
                     <a href={selected.moreLink} target="_blank" rel="noopener noreferrer">
-                      Voir en direct
+                      View Live
                     </a>
                   </div>
                 )}
@@ -289,7 +286,7 @@ export default function Projects() {
   );
 }
 
-// Utilitaire pour convertir hex en "r, g, b"
+// Utility to convert hex to "r, g, b"
 function hexToRgb(hex) {
   const cleaned = hex.replace('#', '');
   const bigint = parseInt(cleaned, 16);

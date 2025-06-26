@@ -1,15 +1,17 @@
 // src/components/About.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import avatar from '../assets/ala.jpg'; // Optimise l’image (taille, poids)
+import avatar from '../assets/ala.jpg'; // Ensure optimized size and format
 import {
   FaGithub,
   FaLinkedin,
   FaTwitter,
   FaDownload,
 } from 'react-icons/fa';
-import cvFile from '../assets/cv/CV_Bengueblia_Ala.pdf';import './About.css';
+import cvFile from '../assets/cv/CV_Bengueblia_Ala.pdf';
+import './About.css';
 
+// Rotating text component for keywords
 function RotatingText({ words, interval = 3000 }) {
   const [index, setIndex] = useState(0);
   useEffect(() => {
@@ -36,14 +38,14 @@ function RotatingText({ words, interval = 3000 }) {
 }
 
 export default function About() {
-  // Références pour in-view
+  // Section visibility
   const sectionRef = useRef(null);
   const isSectionInView = useInView(sectionRef, { once: true, margin: '-100px' });
 
-  // Tilt 3D sur la carte principale
+  // 3D tilt effect
   const cardRef = useRef(null);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const handleMouseMove = (e) => {
+  const handleMouseMove = e => {
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
@@ -56,46 +58,42 @@ export default function About() {
     const rotX = ((midY - y) / midY) * maxRot;
     setTilt({ x: rotX, y: rotY });
   };
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-  };
+  const handleMouseLeave = () => setTilt({ x: 0, y: 0 });
 
-  // Animation bordure gradient
+  // Animated gradient border
   const [borderShift, setBorderShift] = useState(0);
   useEffect(() => {
-    let req;
+    let frame;
     const animate = () => {
       setBorderShift(prev => (prev + 0.2) % 360);
-      req = requestAnimationFrame(animate);
+      frame = requestAnimationFrame(animate);
     };
-    req = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(req);
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
   }, []);
 
-  // Theme clair / sombre (si utilisé)
+  // Light/dark theme toggle
   const [theme, setTheme] = useState('light');
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  };
+  const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
 
-  // Contenu : rotating text, intro, skills, timeline
+  // Content data
   const rotatingKeywords = [
     'AI & ML',
     'Web Dev',
-    'Sécurité',
-    'Full-stack',
-    'Anomalies',
+    'Security',
+    'Full-Stack',
+    'Anomaly Detection',
     'UX/UI',
     'Cloud',
     'Innovation',
   ];
   const introSentences = [
-    "Ingénieur informatique passionné, je relève des défis techniques avec enthousiasme.",
-    "Je conçois des applications full-stack innovantes, de la détection d’anomalies à des plateformes interactives.",
-    "Toujours en apprentissage : j’explore de nouveaux frameworks, architectures et approches AI/ML."
+    "I'm a passionate computer engineer who tackles technical challenges with enthusiasm.",
+    "I build innovative full-stack applications, from anomaly detection to interactive platforms.",
+    "Always learning: exploring new frameworks, architectures, and AI/ML approaches."
   ];
   const skills = [
     { name: 'JavaScript', level: 85 },
@@ -109,27 +107,27 @@ export default function About() {
   const timeline = [
     {
       year: '2024',
-      title: 'Détection d’anomalies (MOCCA)',
-      desc: 'Développement d’une plateforme full-stack pour détecter les falsifications d’images via un autoencodeur multi-couches. Implémentation du microservice AI en Flask, orchestration Node.js, frontend React.'
+      title: 'MOCCA Anomaly Detection',
+      desc: 'Developed a full-stack platform for image forgery detection using a multi-layer autoencoder. Deployed AI microservice with Flask, orchestrated via Node.js, frontend in React.'
     },
     {
       year: '2023',
-      title: 'Application e-commerce React/Node',
-      desc: 'Création d’un site de gestion des candidate et admin  en ligne pour une societé avec React, Node.js, Express, MongoDB, authentification sécurisée, responsive design.'
+      title: 'E-commerce Admin & Candidate Portal',
+      desc: 'Built an online management system for admin and candidate applications using React, Node.js, Express, MongoDB with secure authentication and responsive design.'
     },
     {
       year: '2022',
-      title: 'Interface Web Flask & OpenCV',
-      desc: 'Projet de reconnaissance faciale utilisant Flask, OpenCV, face_recognition, déploiement via Docker.'
+      title: 'Flask & OpenCV Web Interface',
+      desc: 'Created a facial recognition project using Flask, OpenCV, face_recognition, and containerized with Docker.'
     },
     {
       year: '2021',
-      title: 'Stage DevOps & Cloud',
-      desc: 'Mise en place de pipelines CI/CD, conteneurisation Docker, déploiement sur AWS/GCP, surveillance et monitoring.'
+      title: 'DevOps & Cloud Internship',
+      desc: 'Implemented CI/CD pipelines, Docker containerization, deployment on AWS/GCP, and monitoring solutions.'
     },
   ];
 
-  // Variants Framer Motion
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { when: 'beforeChildren', staggerChildren: 0.2 } },
@@ -141,7 +139,7 @@ export default function About() {
 
   return (
     <section ref={sectionRef} className="about-wrapper">
-      {/* Toggle theme */}
+      {/* Theme toggle button */}
       <button
         className="theme-toggle-btn"
         onClick={toggleTheme}
@@ -150,12 +148,12 @@ export default function About() {
         {theme === 'light' ? '🌙' : '☀️'}
       </button>
 
-      {/* Arrière-plan animé (blobs) */}
+      {/* Animated background blobs */}
       <div className="blob blob-1" />
       <div className="blob blob-2" />
       <div className="blob blob-3" />
 
-      {/* Carte principale avec tilt 3D */}
+      {/* 3D tilted content card */}
       <div className="about-3d-wrapper">
         <motion.div
           ref={cardRef}
@@ -170,23 +168,22 @@ export default function About() {
           animate={isSectionInView ? 'visible' : 'hidden'}
           variants={containerVariants}
         >
-          {/* Avatar et intro */}
           <div className="about-inner">
+            {/* Avatar with hover effect */}
             <motion.div
               className="about-avatar-wrapper"
               variants={itemVariants}
               whileHover={{ scale: 1.08, rotateZ: 2 }}
               transition={{ type: 'spring', stiffness: 200 }}
             >
-              <img src={avatar} alt="Ala Bengueblia" className="about-avatar"/>
+              <img src={avatar} alt="Ala Bengueblia" className="about-avatar" />
             </motion.div>
             <div className="about-content">
               <motion.h2 className="about-title" variants={itemVariants}>
-                <span className="gradient-text">À propos de moi</span>
+                <span className="gradient-text">About Me</span>
               </motion.h2>
               <motion.h3 className="about-subtitle" variants={itemVariants}>
-                Passionné par{' '}
-                <RotatingText words={rotatingKeywords} interval={2500} />
+                Passionate about <RotatingText words={rotatingKeywords} interval={2500} />
               </motion.h3>
               <div className="about-text-block">
                 {introSentences.map((text, idx) => (
@@ -196,38 +193,25 @@ export default function About() {
                     variants={itemVariants}
                     transition={{ delay: idx * 0.3 }}
                   >
-                    {text.split(' ').map((word, widx) => {
-                      const clean = word.replace(/[^a-zA-ZÀ-ÿ&]/g, '');
-                      const highlights = [
-                        'passionné','applications','innovantes','défis','AI','ML','frameworks','architectures','apprentissage'
-                      ];
-                      if (highlights.some(h => clean.toLowerCase().includes(h.toLowerCase()))) {
-                        return (
-                          <span key={widx} className="about-highlight">
-                            {word + ' '}
-                          </span>
-                        );
-                      }
-                      return word + ' ';
-                    })}
+                    {text}
                   </motion.p>
                 ))}
               </div>
-              {/* Bouton téléchargement CV */}
+              {/* Download CV button */}
               <motion.a
-                  href={cvFile}
-                  className="btn-download-cv"
-                  variants={itemVariants}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <FaDownload className="icon-cv" /> Télécharger mon CV
-                </motion.a>
+                href={cvFile}
+                className="btn-download-cv"
+                variants={itemVariants}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FaDownload className="icon-cv" /> Download My CV
+              </motion.a>
 
-              {/* Icônes sociales */}
+              {/* Social icons */}
               <motion.div className="social-icons" variants={itemVariants}>
                 <a href="https://github.com/ala-bengueblia" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
                   <FaGithub />
@@ -242,10 +226,10 @@ export default function About() {
             </div>
           </div>
 
-          {/* Timeline d’expérience */}
+          {/* Experience Timeline */}
           <div className="timeline-section">
             <motion.h2 className="section-title" variants={itemVariants}>
-              Mon parcours
+              My Journey
             </motion.h2>
             <div className="timeline-container">
               {timeline.map((item, idx) => {
@@ -272,10 +256,10 @@ export default function About() {
             </div>
           </div>
 
-          {/* Compétences */}
+          {/* Skills Section */}
           <div className="skills-section">
             <motion.h2 className="section-title" variants={itemVariants}>
-              Compétences
+              Skills
             </motion.h2>
             <div className="skills-container">
               {skills.map((skill, idx) => {

@@ -17,17 +17,30 @@ export default function Footer() {
     >
       <div className="footer-container">
         <p className="footer-text">
-          &copy; {currentYear} <strong>Ala Bengueblia</strong> — Tous droits réservés.
+          &copy; {currentYear} <strong>Ala Bengueblia</strong> — All rights reserved.
         </p>
 
         <div className="footer-socials">
-          <a href="https://github.com/ala-bengueblia" target="_blank" rel="noopener noreferrer" title="GitHub">
+          <a
+            href="https://github.com/ala-bengueblia"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="GitHub"
+          >
             <FaGithub />
           </a>
-          <a href="https://linkedin.com/in/ala-ben" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <a
+            href="https://linkedin.com/in/ala-ben"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="LinkedIn"
+          >
             <FaLinkedin />
           </a>
-          <a href="alabenkeblia@gmail.com" title="Email">
+          <a
+            href="mailto:alabenkeblia@gmail.com"
+            title="Email"
+          >
             <FaEnvelope />
           </a>
         </div>
