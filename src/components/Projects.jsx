@@ -73,7 +73,7 @@ const projects = [
 - Backend with Node.js and Express connected to MongoDB.
 - Secure login system using bcrypt for hashing and JWT for sessions.
 - Role-based access control and admin functionalities.`,
-    demoUrl: null,
+    demoUrl: 'https://youtu.be/PSGSWsu6LoM',
     moreLink: null,
   },
   {
@@ -92,7 +92,7 @@ const projects = [
 - Node.js backend handling requests and managing services.
 - AI microservice with Flask using MOCCA for image forgery detection.
 - Integrated chatbot for real-time user assistance.`,
-    demoUrl: 'https://youtu.be/Ou9LNqssj0Q',
+    demoUrl: 'https://youtu.be/coYwEcQbj4E',
     moreLink: null,
   },
 ];
